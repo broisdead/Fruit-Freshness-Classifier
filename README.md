@@ -1,5 +1,10 @@
 # 🍎 Fruit Freshness Classifier
 
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.13%2B-FF6F00?style=flat&logo=tensorflow&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.8%2B-5C3EE8?style=flat&logo=opencv&logoColor=white)
+![Keras](https://img.shields.io/badge/Keras-2.13%2B-D00000?style=flat&logo=keras&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat&logo=docker&logoColor=white)
+
 A real-time fruit and vegetable freshness detector using a webcam and a pretrained Keras model. It draws bounding boxes around detected produce and classifies it as **Fresh** or **Rotten** across 14 categories.
 
 ---
@@ -83,6 +88,48 @@ python live_fruit_classifier.py \
 | `--confidence-overlay` | `87.0` | Confidence (%) to trigger the overlay image |
 
 Press **`q`** to quit.
+
+---
+
+## Docker Usage
+
+### Build the image
+```bash
+docker build -t fruit-freshness-classifier .
+```
+
+### Run with webcam (Linux)
+```bash
+docker run --rm \
+  --device /dev/video0:/dev/video0 \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  fruit-freshness-classifier
+```
+
+### Run with GPU support (requires [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html))
+```bash
+docker run --rm \
+  --gpus all \
+  --device /dev/video0:/dev/video0 \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  fruit-freshness-classifier
+```
+
+### Pass custom arguments
+```bash
+docker run --rm \
+  --device /dev/video0:/dev/video0 \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  fruit-freshness-classifier \
+  python live_fruit_classifier.py --confidence-overlay 85 --camera 0
+```
+
+> **macOS / Windows:** Docker does not support direct webcam passthrough on these platforms. Use the script natively with `python live_fruit_classifier.py` instead.
+
+> **CPU-only:** Change the base image in `Dockerfile` from `tensorflow/tensorflow:2.13.0-gpu` to `tensorflow/tensorflow:2.13.0`.
 
 ---
 
