@@ -1,6 +1,5 @@
 # 🍎 Fruit Freshness Classifier
 
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.13%2B-FF6F00?style=flat&logo=tensorflow&logoColor=white)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.8%2B-5C3EE8?style=flat&logo=opencv&logoColor=white)
 ![Keras](https://img.shields.io/badge/Keras-2.13%2B-D00000?style=flat&logo=keras&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat&logo=docker&logoColor=white)
